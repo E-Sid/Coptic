@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Coptic CS to Unicode Conversion Utility</title>
+	<meta author="Hosam Adeeb Nashed, 2019, March" />
+	<script language="JavaScript1.5" type="application/x-javascript">
+	const csChars = "ABGDE^ZY:IKLMNXOPRCTUV<\"WSFQHJ{}abgde^zy;iklmnxoprctuv,'wsfqhj[]" + " .\n`=" + "&~@>|¡¢¤¥½¾?!";
+	const utf8Chars = "ⲀⲂⲄⲆⲈⲊⲌⲎⲐⲒⲔⲖⲘⲚⲜⲞⲠⲢⲤⲦⲨⲪⲬⲮⲰϢϤϦϨϪϬϮⲁⲃⲅⲇⲉⲋⲍⲏⲑⲓⲕⲗⲙⲛⲝⲟⲡⲣⲥⲧⲩⲫⲭⲯⲱϣϥϧϩϫϭϯ" + " .\ǹ̅" + ";.:,ⳉ⳪⳥⳨⳩⳧⳧?!";
+	
+	function doConversion()
+	{
+		var theInput = Converter.csInput.value;
+		var acc = "", diacritic = "";
+		var csIndex;
+		
+		for (var i=0; i <= theInput.length-1; i++)
+		{
+			if(csChars.indexOf(theInput[i]) < 0)
+			{
+				if(theInput[i] == "£") {acc += "ⲙⲉⲛⲉⲛⲥⲁ";}
+				else if(theInput[i] == "\\") {acc += "ⲟⲩ";}
+				else if(theInput[i] == "¦") {acc += "ⲡⲁⲣⲑⲉⲛⲟⲥ";}
+				else if(theInput[i] == "¨") {acc += "Ⲥⲩⲛ Ⲑⲉⲱ ⲓⲥⲭⲩⲣⲟⲥ";}
+			}
+			else
+			{
+				csIndex = csChars.indexOf(theInput[i]);
+				
+				if(theInput[i] == "`" || theInput[i] == "=")
+				{
+					diacritic = utf8Chars[csIndex];
+					continue;
+				}
+				
+				if(diacritic != "")
+				{
+					acc += utf8Chars[csIndex];
+					acc += diacritic;
+					diacritic = "";
+				}
+				else
+				{ acc += utf8Chars[csIndex]; }
+			}
+		}
+		Converter.utf8Output.value = acc;
+	}
+	</script>
+</head>
+<body>
+<h1 align="center">Coptic CS to Unicode Conversion Utility</h1>
+<form name="Converter">
+	<table align="center">
+		<tr align="center">
+			<td><textarea name="csInput" rows="80" cols="80"></textarea></td>
+			<td valign="middle">
+				<input type="button" name="doIt" value="Convert..." onclick="doConversion();"/><br />
+				<input type="button" name="clearAll" value="Clear All" onclick="csInput.value = ''; utf8Output.value = '';"/>
+			</td>
+			<td><textarea name="utf8Output" rows="80" cols="80" readonly="readonly"></textarea></td>
+		</tr>
+	</table>
+</form>
+</body>
+</html>
