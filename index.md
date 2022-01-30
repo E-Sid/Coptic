@@ -1,4 +1,7 @@
-[pachomian.odt](https://github.com/E-Sid/Coptic/files/7965947/pachomian.odt)
+
+- [Shafik Demian](https://github.com/E-Sid/Coptic/blob/master/shafiq-demian.md)
+- [Pachomian](https://github.com/E-Sid/Coptic/blob/master/Pachomian.md)
+
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/E-Sid/Coptic/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
